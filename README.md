@@ -1,6 +1,6 @@
-# Projeto Hail Mary AR
+# Missao Estelar AR
 
-Experimento de Realidade Aumentada feito com A-Frame e AR.js, inspirado na energia sci-fi de *Projeto Hail Mary* / *Devorador de Estrelas*.
+Experimento de Realidade Aumentada feito com A-Frame e AR.js, com tema sci-fi de missão estelar, nave alienígena e enxame devorador de estrelas.
 
 ## Como testar
 
@@ -15,9 +15,9 @@ Experimento de Realidade Aumentada feito com A-Frame e AR.js, inspirado na energ
 - Elementos 3D com A-Frame.
 - Interação por toque/click no núcleo e por botão na interface.
 - Experiência multimídia com animação visual e som gerado no navegador.
-- Cena procedural com nave Hail Mary, enxame de Astrophage, satélites orbitais, raios, ondas de energia, cristais e múltiplas fases visuais.
-- Elementos não orbitais: console holográfico de telemetria, laboratório de amostra e scanner em leque.
-- Estética tecnológica com HUD, scanlines, grade holográfica, eixos de coordenada, nós de circuito e telemetria reativa.
+- Cena procedural com nave principal, nave alienígena lateral, enxame de Astrophage, satélites orbitais, raios, ondas de energia, cristais e múltiplas fases visuais.
+- Elementos não orbitais: scanner em leque, grade holográfica, eixos de coordenada e sistemas de fase.
+- Estética tecnológica com HUD, scanlines, nós de circuito e efeitos reativos.
 
 ## Fases
 
@@ -25,7 +25,7 @@ A cada toque no núcleo ou no botão "Avancar", a cena alterna entre seis fases:
 
 - Sol: estrela instável, feixes de drenagem e núcleo dilatado.
 - Astrophage: enxame se fecha sobre a estrela e acelera o campo orbital.
-- Hail Mary: a nave entra em manobra, com rota e pontos de navegação.
+- Nave: a nave principal entra em manobra, com rota e pontos de navegação.
 - Tau Ceti: sinais alienígenas aparecem em anéis e barras pulsantes.
 - Sonda: cápsula de amostra e contenção ficam no centro da cena.
 - Cura: escudo/onda de restauração se expande a partir do núcleo.

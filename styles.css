@@ -136,15 +136,6 @@ h1 {
   font-weight: 850;
 }
 
-.mission-status {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  color: #ffbf47;
-  font-size: 0.78rem;
-  font-weight: 850;
-}
-
 .status.is-visible {
   color: #79ffe1;
 }
@@ -264,15 +255,10 @@ a-scene {
   }
 
   .status,
-  .mode-status,
-  .mission-status {
+  .mode-status {
     min-height: 36px;
     font-size: 0.72rem;
     line-height: 1.1;
-  }
-
-  .mission-status {
-    display: none;
   }
 
   .evolve-button {
@@ -312,8 +298,7 @@ a-scene {
   }
 
   .status,
-  .mode-status,
-  .mission-status {
+  .mode-status {
     grid-column: 1 / -1;
     min-height: 24px;
     justify-content: center;
@@ -339,10 +324,6 @@ a-scene {
     left: max(8px, env(safe-area-inset-left));
     right: 78px;
     grid-template-columns: 1fr auto auto;
-  }
-
-  .mission-status {
-    display: none;
   }
 
   .marker-link {

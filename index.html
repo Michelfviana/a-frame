@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=overlays-content" />
-    <title>Projeto Hail Mary AR</title>
+    <title>Missao Estelar AR</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
@@ -12,13 +12,12 @@
     <main class="hud" aria-live="polite">
       <section class="brand">
         <p class="kicker">Missao WebAR</p>
-        <h1>Projeto Hail Mary</h1>
+        <h1>Missao Estelar</h1>
       </section>
 
       <section class="panel">
         <span id="marker-status" class="status">Procurando marcador</span>
         <span id="mode-status" class="mode-status">Fase 1</span>
-        <span id="mission-status" class="mission-status">Sol em queda</span>
         <button id="evolve-button" class="evolve-button" type="button" disabled>
           Avancar
         </button>
@@ -90,7 +89,7 @@
           ></a-entity>
 
           <a-entity
-            id="hail-mary-ship"
+            id="main-ship"
             position="0 1.22 0"
             rotation="0 0 0"
             animation="property: rotation; to: 0 360 0; dur: 16800; loop: true; easing: linear"
@@ -143,6 +142,58 @@
               rotation="0 0 90"
               material="color: #dbeafe; emissive: #60a5fa; emissiveIntensity: 0.26"
             ></a-cylinder>
+          </a-entity>
+
+          <a-entity
+            id="rocky-ship"
+            position="1.02 0.86 -0.2"
+            rotation="0 -32 8"
+            scale="0.9 0.9 0.9"
+            animation="property: position; from: 1.02 0.8 -0.2; to: 1.02 0.98 -0.2; dur: 2200; dir: alternate; loop: true; easing: easeInOutSine"
+          >
+            <a-entity
+              id="rocky-core"
+              geometry="primitive: dodecahedron; radius: 0.16"
+              material="color: #7dd3fc; emissive: #164e63; emissiveIntensity: 0.32; metalness: 0.55; roughness: 0.18"
+            ></a-entity>
+            <a-cylinder
+              radius="0.045"
+              height="0.46"
+              position="0.24 0 0"
+              rotation="0 0 90"
+              material="color: #dbeafe; emissive: #38bdf8; emissiveIntensity: 0.2; metalness: 0.5; roughness: 0.22"
+            ></a-cylinder>
+            <a-cylinder
+              radius="0.045"
+              height="0.46"
+              position="-0.24 0 0"
+              rotation="0 0 90"
+              material="color: #dbeafe; emissive: #38bdf8; emissiveIntensity: 0.2; metalness: 0.5; roughness: 0.22"
+            ></a-cylinder>
+            <a-cylinder
+              radius="0.035"
+              height="0.42"
+              position="0 0.2 0"
+              rotation="90 0 0"
+              material="color: #94a3b8; emissive: #0ea5e9; emissiveIntensity: 0.18; metalness: 0.52; roughness: 0.24"
+            ></a-cylinder>
+            <a-cylinder
+              radius="0.035"
+              height="0.42"
+              position="0 -0.2 0"
+              rotation="90 0 0"
+              material="color: #94a3b8; emissive: #0ea5e9; emissiveIntensity: 0.18; metalness: 0.52; roughness: 0.24"
+            ></a-cylinder>
+            <a-torus
+              id="rocky-ring"
+              radius="0.24"
+              radius-tubular="0.008"
+              rotation="70 0 0"
+              material="color: #f8fafc; emissive: #38bdf8; emissiveIntensity: 0.48; transparent: true; opacity: 0.74"
+              animation="property: rotation; to: 430 0 0; dur: 5400; loop: true; easing: linear"
+            ></a-torus>
+            <a-sphere radius="0.038" position="0.45 0 0" material="color: #facc15; emissive: #facc15; emissiveIntensity: 0.85"></a-sphere>
+            <a-sphere radius="0.038" position="-0.45 0 0" material="color: #facc15; emissive: #facc15; emissiveIntensity: 0.85"></a-sphere>
           </a-entity>
 
           <a-torus
@@ -267,39 +318,6 @@
             ></a-sphere>
             <a-torus radius="0.5" radius-tubular="0.012" rotation="90 0 0" material="color: #4ade80; emissive: #4ade80; emissiveIntensity: 0.72; transparent: true; opacity: 0.64"></a-torus>
             <a-torus radius="0.74" radius-tubular="0.008" rotation="38 0 0" material="color: #facc15; emissive: #facc15; emissiveIntensity: 0.5; transparent: true; opacity: 0.46"></a-torus>
-          </a-entity>
-
-          <a-entity id="mission-console" position="-0.82 0.34 0.56" rotation="66 0 -18">
-            <a-box
-              width="0.72"
-              height="0.38"
-              depth="0.018"
-              material="color: #071526; emissive: #0d2d63; emissiveIntensity: 0.28; transparent: true; opacity: 0.82; metalness: 0.2; roughness: 0.24"
-            ></a-box>
-            <a-text
-              id="console-title"
-              value="HAIL MARY"
-              align="center"
-              color="#dbeafe"
-              width="1.4"
-              position="0 0.11 0.018"
-            ></a-text>
-            <a-text
-              id="console-readout"
-              value="SOL 42% | AMOSTRA 0%"
-              align="center"
-              color="#79ffe1"
-              width="1.1"
-              position="0 -0.02 0.02"
-            ></a-text>
-            <a-box id="console-bar" width="0.48" height="0.032" depth="0.02" position="0 -0.14 0.024" material="color: #ff8a1f; emissive: #ff8a1f; emissiveIntensity: 0.55"></a-box>
-          </a-entity>
-
-          <a-entity id="sample-lab" position="0.82 0.18 0.46" rotation="0 -24 0">
-            <a-cylinder radius="0.22" height="0.045" material="color: #111827; metalness: 0.45; roughness: 0.22"></a-cylinder>
-            <a-cylinder id="lab-vial" radius="0.052" height="0.34" position="0 0.2 0" material="color: #e0f2fe; emissive: #38bdf8; emissiveIntensity: 0.18; transparent: true; opacity: 0.58; metalness: 0.12; roughness: 0.1"></a-cylinder>
-            <a-sphere id="lab-sample" radius="0.045" position="0 0.22 0" material="color: #ff8a1f; emissive: #ff8a1f; emissiveIntensity: 0.9"></a-sphere>
-            <a-torus radius="0.16" radius-tubular="0.006" position="0 0.2 0" rotation="90 0 0" material="color: #93c5fd; emissive: #93c5fd; emissiveIntensity: 0.42; transparent: true; opacity: 0.68"></a-torus>
           </a-entity>
 
           <a-entity id="scanner-fan" position="0 0.08 -0.56" visible="false">
