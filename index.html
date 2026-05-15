@@ -17,6 +17,9 @@
 
       <section class="panel">
         <span id="marker-status" class="status">Procurando marcador</span>
+        <button id="evolve-button" class="evolve-button" type="button" disabled>
+          Evoluir jardim
+        </button>
         <a class="marker-link" href="https://ar-js-org.github.io/AR.js/data/images/hiro.png" target="_blank" rel="noreferrer">
           Abrir marcador Hiro
         </a>
@@ -32,8 +35,6 @@
       vr-mode-ui="enabled: false"
       renderer="antialias: true; alpha: true; colorManagement: true"
       arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
-      cursor="rayOrigin: mouse"
-      raycaster="objects: .interactive"
     >
       <a-assets>
         <a-mixin
@@ -46,6 +47,14 @@
 
       <a-marker id="hiro-marker" preset="hiro" emitevents="true">
         <a-entity id="garden" position="0 0 0" rotation="-90 0 0" scale="1 1 1">
+          <a-entity
+            id="core-hit-area"
+            class="interactive"
+            geometry="primitive: sphere; radius: 0.58"
+            material="transparent: true; opacity: 0; depthWrite: false"
+            position="0 0.42 0"
+          ></a-entity>
+
           <a-entity
             id="core"
             class="interactive"
@@ -82,6 +91,14 @@
             <a-entity mixin="seed" material="color: #ff7ab6; emissive: #ff4f8b; emissiveIntensity: 0.3" position="-0.34 0 -0.74"></a-entity>
           </a-entity>
 
+          <a-entity id="spark-field" position="0 0.42 0">
+            <a-sphere radius="0.025" color="#79ffe1" position="0.12 0.48 -0.62"></a-sphere>
+            <a-sphere radius="0.018" color="#ffffff" position="-0.68 0.18 -0.12"></a-sphere>
+            <a-sphere radius="0.022" color="#ffdf75" position="0.54 0.28 0.44"></a-sphere>
+            <a-sphere radius="0.016" color="#ff7ab6" position="-0.2 0.62 0.52"></a-sphere>
+            <a-sphere radius="0.02" color="#38d5ff" position="0.74 0.08 -0.18"></a-sphere>
+          </a-entity>
+
           <a-cylinder
             id="base"
             radius="0.62"
@@ -103,7 +120,11 @@
         </a-entity>
       </a-marker>
 
-      <a-entity camera></a-entity>
+      <a-entity
+        camera
+        cursor="fuse: false; rayOrigin: mouse"
+        raycaster="objects: .interactive; far: 20"
+      ></a-entity>
     </a-scene>
 
     <script src="script.js"></script>

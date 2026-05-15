@@ -24,20 +24,28 @@ const palettes = [
 
 const marker = document.querySelector("#hiro-marker");
 const markerStatus = document.querySelector("#marker-status");
+const evolveButton = document.querySelector("#evolve-button");
 const soundToggle = document.querySelector("#sound-toggle");
 const core = document.querySelector("#core");
+const coreHitArea = document.querySelector("#core-hit-area");
 const ringA = document.querySelector("#ring-a");
 const ringB = document.querySelector("#ring-b");
 const caption = document.querySelector("#caption");
 const orbit = document.querySelector("#orbit");
+const sparkField = document.querySelector("#spark-field");
 
 let paletteIndex = 0;
 let soundEnabled = false;
+let markerVisible = false;
 let audioContext;
+let lastInteraction = 0;
 
 function setMarkerVisible(isVisible) {
+  markerVisible = isVisible;
   markerStatus.textContent = isVisible ? "Marcador detectado" : "Procurando marcador";
   markerStatus.classList.toggle("is-visible", isVisible);
+  evolveButton.disabled = !isVisible;
+  caption.setAttribute("value", isVisible ? palettes[paletteIndex].caption : "aponte para o Hiro");
 }
 
 function ensureAudioContext() {
@@ -93,11 +101,31 @@ function applyPalette() {
     loop: true,
     easing: "linear",
   });
+  sparkField.setAttribute("animation__burst", {
+    property: "scale",
+    from: "0.72 0.72 0.72",
+    to: "1.18 1.18 1.18",
+    dur: 420,
+    dir: "alternate",
+    easing: "easeOutQuad",
+  });
+  core.setAttribute("animation__tap", {
+    property: "position",
+    from: "0 0.34 0",
+    to: "0 0.46 0",
+    dur: 240,
+    dir: "alternate",
+    easing: "easeOutQuad",
+  });
 
   playTone();
 }
 
 function cycleGarden() {
+  const now = performance.now();
+  if (now - lastInteraction < 260) return;
+
+  lastInteraction = now;
   paletteIndex = (paletteIndex + 1) % palettes.length;
   applyPalette();
 }
@@ -105,6 +133,13 @@ function cycleGarden() {
 marker.addEventListener("markerFound", () => setMarkerVisible(true));
 marker.addEventListener("markerLost", () => setMarkerVisible(false));
 core.addEventListener("click", cycleGarden);
+coreHitArea.addEventListener("click", cycleGarden);
+evolveButton.addEventListener("click", cycleGarden);
+
+document.querySelector("a-scene").addEventListener("touchend", (event) => {
+  if (!markerVisible || event.target.closest("button, a")) return;
+  cycleGarden();
+});
 
 soundToggle.addEventListener("click", () => {
   soundEnabled = !soundEnabled;
