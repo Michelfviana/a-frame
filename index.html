@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=overlays-content" />
-    <title>Jardim Orbital AR</title>
+    <title>Projeto Hail Mary AR</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
@@ -11,14 +11,16 @@
   <body>
     <main class="hud" aria-live="polite">
       <section class="brand">
-        <p class="kicker">WebAR com A-Frame</p>
-        <h1>Jardim Orbital</h1>
+        <p class="kicker">Missao WebAR</p>
+        <h1>Projeto Hail Mary</h1>
       </section>
 
       <section class="panel">
         <span id="marker-status" class="status">Procurando marcador</span>
+        <span id="mode-status" class="mode-status">Fase 1</span>
+        <span id="mission-status" class="mission-status">Sol em queda</span>
         <button id="evolve-button" class="evolve-button" type="button" disabled>
-          Evoluir
+          Avancar
         </button>
         <a class="marker-link" href="https://ar-js-org.github.io/AR.js/data/images/hiro.png" target="_blank" rel="noreferrer">
           Marcador Hiro
@@ -43,10 +45,23 @@
           material="metalness: 0.2; roughness: 0.35"
           animation="property: rotation; to: 360 180 0; dur: 3200; loop: true; easing: linear"
         ></a-mixin>
+        <a-mixin
+          id="petal"
+          geometry="primitive: cone; radiusBottom: 0.08; radiusTop: 0.012; height: 0.38; segmentsRadial: 5"
+          material="metalness: 0.12; roughness: 0.3; transparent: true; opacity: 0.86"
+        ></a-mixin>
+        <a-mixin
+          id="beam"
+          geometry="primitive: cylinder; radius: 0.008; height: 1.08; segmentsRadial: 8"
+          material="transparent: true; opacity: 0.34; roughness: 0.2"
+        ></a-mixin>
       </a-assets>
 
       <a-marker id="hiro-marker" preset="hiro" emitevents="true">
         <a-entity id="garden" position="0 0 0" rotation="-90 0 0" scale="1 1 1">
+          <a-entity light="type: ambient; intensity: 0.72; color: #dffdf5"></a-entity>
+          <a-entity id="core-light" light="type: point; intensity: 1.6; distance: 2.4; color: #79ffe1" position="0 0.7 0"></a-entity>
+
           <a-entity
             id="core-hit-area"
             class="interactive"
@@ -58,12 +73,77 @@
           <a-entity
             id="core"
             class="interactive"
-            geometry="primitive: icosahedron; radius: 0.34; detail: 2"
+            geometry="primitive: icosahedron; radius: 0.32; detail: 2"
             material="color: #2ef2c2; metalness: 0.35; roughness: 0.18; emissive: #0c6b58; emissiveIntensity: 0.25"
             position="0 0.42 0"
             animation="property: rotation; to: 0 360 0; dur: 5400; loop: true; easing: linear"
             animation__pulse="property: scale; from: 1 1 1; to: 1.14 1.14 1.14; dir: alternate; dur: 1200; loop: true; easing: easeInOutSine"
           ></a-entity>
+
+          <a-entity
+            id="inner-crystal"
+            geometry="primitive: octahedron; radius: 0.18"
+            position="0 0.88 0"
+            material="color: #ffffff; emissive: #79ffe1; emissiveIntensity: 0.6; metalness: 0.2; roughness: 0.12"
+            animation="property: rotation; to: 360 0 360; dur: 4800; loop: true; easing: linear"
+            animation__float="property: position; from: 0 0.78 0; to: 0 1.02 0; dur: 1900; dir: alternate; loop: true; easing: easeInOutSine"
+          ></a-entity>
+
+          <a-entity
+            id="hail-mary-ship"
+            position="0 1.22 0"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; dur: 16800; loop: true; easing: linear"
+          >
+            <a-cylinder
+              id="ship-body"
+              radius="0.055"
+              height="0.42"
+              rotation="90 0 0"
+              material="color: #d9eef7; metalness: 0.65; roughness: 0.22"
+            ></a-cylinder>
+            <a-cone
+              id="ship-nose"
+              radius-bottom="0.058"
+              radius-top="0"
+              height="0.13"
+              position="0 0 -0.28"
+              rotation="90 0 0"
+              material="color: #ffffff; metalness: 0.5; roughness: 0.18"
+            ></a-cone>
+            <a-cylinder
+              id="ship-engine"
+              radius="0.044"
+              height="0.08"
+              position="0 0 0.25"
+              rotation="90 0 0"
+              material="color: #101923; emissive: #ff8a1f; emissiveIntensity: 0.9; metalness: 0.4; roughness: 0.25"
+            ></a-cylinder>
+            <a-box
+              class="ship-panel"
+              width="0.04"
+              height="0.012"
+              depth="0.5"
+              position="0.22 0 0"
+              material="color: #1e40af; emissive: #38bdf8; emissiveIntensity: 0.24; metalness: 0.15; roughness: 0.28"
+            ></a-box>
+            <a-box
+              class="ship-panel"
+              width="0.04"
+              height="0.012"
+              depth="0.5"
+              position="-0.22 0 0"
+              material="color: #1e40af; emissive: #38bdf8; emissiveIntensity: 0.24; metalness: 0.15; roughness: 0.28"
+            ></a-box>
+            <a-cylinder
+              class="ship-antenna"
+              radius="0.006"
+              height="0.38"
+              position="0 0.12 -0.02"
+              rotation="0 0 90"
+              material="color: #dbeafe; emissive: #60a5fa; emissiveIntensity: 0.26"
+            ></a-cylinder>
+          </a-entity>
 
           <a-torus
             id="ring-a"
@@ -85,11 +165,43 @@
             animation="property: rotation; to: 395 0 60; dur: 8200; loop: true; easing: linear"
           ></a-torus>
 
+          <a-torus
+            id="ring-c"
+            color="#79ffe1"
+            radius="0.92"
+            radius-tubular="0.006"
+            position="0 0.42 0"
+            rotation="68 0 122"
+            material="opacity: 0.78; transparent: true"
+            animation="property: rotation; to: 68 -360 122; dur: 11200; loop: true; easing: linear"
+          ></a-torus>
+
           <a-entity id="orbit" position="0 0.42 0" animation="property: rotation; to: 0 -360 0; dur: 7600; loop: true; easing: linear">
             <a-entity mixin="seed" material="color: #ffffff; emissive: #38d5ff; emissiveIntensity: 0.35" position="0.82 0 0"></a-entity>
             <a-entity mixin="seed" material="color: #ffe66d; emissive: #ffbf47; emissiveIntensity: 0.3" position="-0.48 0 0.66"></a-entity>
             <a-entity mixin="seed" material="color: #ff7ab6; emissive: #ff4f8b; emissiveIntensity: 0.3" position="-0.34 0 -0.74"></a-entity>
           </a-entity>
+
+          <a-entity id="petal-crown" position="0 0.44 0" animation="property: rotation; to: 0 360 0; dur: 10400; loop: true; easing: linear">
+            <a-entity class="petal" mixin="petal" position="0 0.22 -0.58" rotation="58 0 0"></a-entity>
+            <a-entity class="petal" mixin="petal" position="0.5 0.22 -0.29" rotation="58 -60 0"></a-entity>
+            <a-entity class="petal" mixin="petal" position="0.5 0.22 0.29" rotation="58 -120 0"></a-entity>
+            <a-entity class="petal" mixin="petal" position="0 0.22 0.58" rotation="58 180 0"></a-entity>
+            <a-entity class="petal" mixin="petal" position="-0.5 0.22 0.29" rotation="58 120 0"></a-entity>
+            <a-entity class="petal" mixin="petal" position="-0.5 0.22 -0.29" rotation="58 60 0"></a-entity>
+          </a-entity>
+
+          <a-entity id="beam-field" position="0 0.48 0" animation="property: rotation; to: 0 -360 0; dur: 13600; loop: true; easing: linear">
+            <a-entity class="beam" mixin="beam" position="0.72 0 0" rotation="0 0 86"></a-entity>
+            <a-entity class="beam" mixin="beam" position="-0.72 0 0" rotation="0 0 86"></a-entity>
+            <a-entity class="beam" mixin="beam" position="0 0 0.72" rotation="86 0 0"></a-entity>
+            <a-entity class="beam" mixin="beam" position="0 0 -0.72" rotation="86 0 0"></a-entity>
+          </a-entity>
+
+          <a-entity id="constellation-field" position="0 0.46 0"></a-entity>
+          <a-entity id="lattice-field" position="0 0.46 0"></a-entity>
+          <a-entity id="wave-field" position="0 0.42 0"></a-entity>
+          <a-entity id="astrophage-field" position="0 0.42 0"></a-entity>
 
           <a-entity id="spark-field" position="0 0.42 0">
             <a-sphere radius="0.025" color="#79ffe1" position="0.12 0.48 -0.62"></a-sphere>
@@ -97,6 +209,8 @@
             <a-sphere radius="0.022" color="#ffdf75" position="0.54 0.28 0.44"></a-sphere>
             <a-sphere radius="0.016" color="#ff7ab6" position="-0.2 0.62 0.52"></a-sphere>
             <a-sphere radius="0.02" color="#38d5ff" position="0.74 0.08 -0.18"></a-sphere>
+            <a-sphere radius="0.014" color="#ffffff" position="-0.12 0.84 -0.32"></a-sphere>
+            <a-sphere radius="0.017" color="#79ffe1" position="0.26 0.76 0.36"></a-sphere>
           </a-entity>
 
           <a-cylinder

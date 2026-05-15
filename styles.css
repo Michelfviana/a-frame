@@ -22,6 +22,34 @@ body {
   touch-action: manipulation;
 }
 
+body::before,
+body::after {
+  pointer-events: none;
+  position: fixed;
+  z-index: 9;
+  content: "";
+}
+
+body::before {
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 45%, transparent 0 28%, rgb(0 0 0 / 14%) 72%),
+    linear-gradient(180deg, rgb(0 0 0 / 18%), transparent 22%, transparent 72%, rgb(0 0 0 / 22%));
+}
+
+body::after {
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgb(121 255 225 / 34%);
+  border-radius: 999px;
+  box-shadow:
+    inset 0 0 0 8px rgb(121 255 225 / 3%),
+    0 0 26px rgb(121 255 225 / 18%);
+  transform: translate(-50%, -50%);
+}
+
 .hud {
   pointer-events: none;
   position: fixed;
@@ -83,6 +111,24 @@ h1 {
   color: #ffdf75;
   font-size: 0.9rem;
   font-weight: 800;
+}
+
+.mode-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  color: #dce7ff;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.mission-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  color: #ffbf47;
+  font-size: 0.78rem;
+  font-weight: 850;
 }
 
 .status.is-visible {
@@ -194,7 +240,7 @@ a-scene {
     left: max(10px, env(safe-area-inset-left));
     width: auto;
     min-width: 0;
-    grid-template-columns: minmax(82px, 1fr) auto auto;
+    grid-template-columns: minmax(62px, 1fr) auto auto auto;
     align-items: center;
     gap: 6px;
     padding: 8px;
@@ -203,10 +249,16 @@ a-scene {
     box-shadow: 0 10px 28px rgb(0 0 0 / 20%);
   }
 
-  .status {
+  .status,
+  .mode-status,
+  .mission-status {
     min-height: 36px;
     font-size: 0.72rem;
     line-height: 1.1;
+  }
+
+  .mission-status {
+    display: none;
   }
 
   .evolve-button {
@@ -245,7 +297,9 @@ a-scene {
     grid-template-columns: 1fr 1fr;
   }
 
-  .status {
+  .status,
+  .mode-status,
+  .mission-status {
     grid-column: 1 / -1;
     min-height: 24px;
     justify-content: center;
@@ -270,7 +324,11 @@ a-scene {
     bottom: max(8px, env(safe-area-inset-bottom));
     left: max(8px, env(safe-area-inset-left));
     right: 78px;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .mission-status {
+    display: none;
   }
 
   .marker-link {
@@ -278,6 +336,7 @@ a-scene {
   }
 
   .status,
+  .mode-status,
   .evolve-button {
     min-height: 34px;
   }
