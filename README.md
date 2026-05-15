@@ -1,6 +1,6 @@
 # Missao Estelar AR
 
-Experimento de Realidade Aumentada feito com A-Frame e AR.js, com tema sci-fi de missão estelar, nave alienígena e enxame devorador de estrelas.
+Experimento de Realidade Aumentada feito com A-Frame e AR.js, com tema sci-fi de missão estelar, nave alienígena e enxame energético.
 
 ## Como testar
 
@@ -15,7 +15,7 @@ Experimento de Realidade Aumentada feito com A-Frame e AR.js, com tema sci-fi de
 - Elementos 3D com A-Frame.
 - Interação por toque/click no núcleo e por botão na interface.
 - Experiência multimídia com animação visual e som gerado no navegador.
-- Cena procedural com nave principal, nave alienígena lateral, enxame de Astrophage, satélites orbitais, raios, ondas de energia, cristais e múltiplas fases visuais.
+- Cena procedural com nave principal, nave alienígena lateral, enxame energético, satélites orbitais, raios, ondas de energia, cristais e múltiplas fases visuais.
 - Elementos não orbitais: scanner em leque, grade holográfica, eixos de coordenada e sistemas de fase.
 - Estética tecnológica com HUD, scanlines, nós de circuito e efeitos reativos.
 
@@ -23,9 +23,9 @@ Experimento de Realidade Aumentada feito com A-Frame e AR.js, com tema sci-fi de
 
 A cada toque no núcleo ou no botão "Avancar", a cena alterna entre seis fases:
 
-- Sol: estrela instável, feixes de drenagem e núcleo dilatado.
-- Astrophage: enxame se fecha sobre a estrela e acelera o campo orbital.
-- Nave: a nave principal entra em manobra, com rota e pontos de navegação.
-- Tau Ceti: sinais alienígenas aparecem em anéis e barras pulsantes.
-- Sonda: cápsula de amostra e contenção ficam no centro da cena.
-- Cura: escudo/onda de restauração se expande a partir do núcleo.
+- Fase 01: núcleo instável, feixes de drenagem e núcleo dilatado.
+- Fase 02: enxame se fecha sobre o núcleo e acelera o campo orbital.
+- Fase 03: a nave principal entra em manobra, com rota e pontos de navegação.
+- Fase 04: sinais aparecem em anéis e barras pulsantes.
+- Fase 05: coleta de dados e contenção ficam no centro da cena.
+- Fase 06: escudo/onda de restauração se expande a partir do núcleo.

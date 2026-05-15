@@ -1,6 +1,6 @@
 const palettes = [
   {
-    name: "Sol",
+    name: "Fase 01",
     core: "#facc15",
     emissive: "#8a3c00",
     crystal: "#fff7ad",
@@ -13,10 +13,10 @@ const palettes = [
     astrophage: "#ff8a1f",
     ship: "#dbeafe",
     frequency: 247,
-    caption: "Sol em colapso",
+    caption: "nucleo instavel",
   },
   {
-    name: "Astrophage",
+    name: "Fase 02",
     core: "#ff4f00",
     emissive: "#7a1900",
     crystal: "#ffd29a",
@@ -29,10 +29,10 @@ const palettes = [
     astrophage: "#ffcf33",
     ship: "#f8fafc",
     frequency: 330,
-    caption: "devorador de estrelas",
+    caption: "enxame ativo",
   },
   {
-    name: "Nave",
+    name: "Fase 03",
     core: "#60a5fa",
     emissive: "#0d2d63",
     crystal: "#e0f2fe",
@@ -45,10 +45,10 @@ const palettes = [
     astrophage: "#ff8a1f",
     ship: "#ffffff",
     frequency: 392,
-    caption: "rumo a Tau Ceti",
+    caption: "manobra orbital",
   },
   {
-    name: "Tau Ceti",
+    name: "Fase 04",
     core: "#2ef2c2",
     emissive: "#0c6b58",
     crystal: "#ffffff",
@@ -61,10 +61,10 @@ const palettes = [
     astrophage: "#facc15",
     ship: "#dbeafe",
     frequency: 494,
-    caption: "sinal alienigena",
+    caption: "sinal detectado",
   },
   {
-    name: "Sonda",
+    name: "Fase 05",
     core: "#c084fc",
     emissive: "#4d237d",
     crystal: "#f1e7ff",
@@ -77,10 +77,10 @@ const palettes = [
     astrophage: "#facc15",
     ship: "#e0f2fe",
     frequency: 587,
-    caption: "dados da amostra",
+    caption: "coleta de dados",
   },
   {
-    name: "Cura",
+    name: "Fase 06",
     core: "#22c55e",
     emissive: "#0f4d27",
     crystal: "#dcfce7",
@@ -93,7 +93,7 @@ const palettes = [
     astrophage: "#facc15",
     ship: "#ffffff",
     frequency: 659,
-    caption: "salvar o Sol",
+    caption: "campo restaurador",
   },
 ];
 
