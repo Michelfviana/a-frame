@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Jardim Orbital AR</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body>
+    <main class="hud" aria-live="polite">
+      <section class="brand">
+        <p class="kicker">WebAR com A-Frame</p>
+        <h1>Jardim Orbital</h1>
+      </section>
+
+      <section class="panel">
+        <span id="marker-status" class="status">Procurando marcador</span>
+        <a class="marker-link" href="https://ar-js-org.github.io/AR.js/data/images/hiro.png" target="_blank" rel="noreferrer">
+          Abrir marcador Hiro
+        </a>
+      </section>
+    </main>
+
+    <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Ativar som">
+      Som
+    </button>
+
+    <a-scene
+      embedded
+      vr-mode-ui="enabled: false"
+      renderer="antialias: true; alpha: true; colorManagement: true"
+      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+      cursor="rayOrigin: mouse"
+      raycaster="objects: .interactive"
+    >
+      <a-assets>
+        <a-mixin
+          id="seed"
+          geometry="primitive: octahedron; radius: 0.08"
+          material="metalness: 0.2; roughness: 0.35"
+          animation="property: rotation; to: 360 180 0; dur: 3200; loop: true; easing: linear"
+        ></a-mixin>
+      </a-assets>
+
+      <a-marker id="hiro-marker" preset="hiro" emitevents="true">
+        <a-entity id="garden" position="0 0 0" rotation="-90 0 0" scale="1 1 1">
+          <a-entity
+            id="core"
+            class="interactive"
+            geometry="primitive: icosahedron; radius: 0.34; detail: 2"
+            material="color: #2ef2c2; metalness: 0.35; roughness: 0.18; emissive: #0c6b58; emissiveIntensity: 0.25"
+            position="0 0.42 0"
+            animation="property: rotation; to: 0 360 0; dur: 5400; loop: true; easing: linear"
+            animation__pulse="property: scale; from: 1 1 1; to: 1.14 1.14 1.14; dir: alternate; dur: 1200; loop: true; easing: easeInOutSine"
+          ></a-entity>
+
+          <a-torus
+            id="ring-a"
+            color="#ffbf47"
+            radius="0.56"
+            radius-tubular="0.018"
+            position="0 0.42 0"
+            rotation="90 0 0"
+            animation="property: rotation; to: 90 360 0; dur: 6500; loop: true; easing: linear"
+          ></a-torus>
+
+          <a-torus
+            id="ring-b"
+            color="#ff4f8b"
+            radius="0.72"
+            radius-tubular="0.012"
+            position="0 0.42 0"
+            rotation="35 0 60"
+            animation="property: rotation; to: 395 0 60; dur: 8200; loop: true; easing: linear"
+          ></a-torus>
+
+          <a-entity id="orbit" position="0 0.42 0" animation="property: rotation; to: 0 -360 0; dur: 7600; loop: true; easing: linear">
+            <a-entity mixin="seed" material="color: #ffffff; emissive: #38d5ff; emissiveIntensity: 0.35" position="0.82 0 0"></a-entity>
+            <a-entity mixin="seed" material="color: #ffe66d; emissive: #ffbf47; emissiveIntensity: 0.3" position="-0.48 0 0.66"></a-entity>
+            <a-entity mixin="seed" material="color: #ff7ab6; emissive: #ff4f8b; emissiveIntensity: 0.3" position="-0.34 0 -0.74"></a-entity>
+          </a-entity>
+
+          <a-cylinder
+            id="base"
+            radius="0.62"
+            height="0.06"
+            color="#13241f"
+            position="0 0.03 0"
+            material="opacity: 0.86; transparent: true"
+          ></a-cylinder>
+
+          <a-text
+            id="caption"
+            value="toque no nucleo"
+            align="center"
+            color="#ffffff"
+            width="2.4"
+            position="0 0.08 0.78"
+            rotation="70 0 0"
+          ></a-text>
+        </a-entity>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script src="script.js"></script>
+  </body>
+</html>
