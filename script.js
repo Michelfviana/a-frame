@@ -15,6 +15,8 @@ const palettes = [
     ship: "#dbeafe",
     frequency: 247,
     caption: "Sol em colapso",
+    readout: "SOL 42% | AMOSTRA 0%",
+    energy: 0.42,
   },
   {
     name: "Astrophage",
@@ -32,6 +34,8 @@ const palettes = [
     ship: "#f8fafc",
     frequency: 330,
     caption: "devorador de estrelas",
+    readout: "SOL 31% | ENXAME 88%",
+    energy: 0.31,
   },
   {
     name: "Hail Mary",
@@ -49,6 +53,8 @@ const palettes = [
     ship: "#ffffff",
     frequency: 392,
     caption: "rumo a Tau Ceti",
+    readout: "CURSO OK | ETA TAU CETI",
+    energy: 0.62,
   },
   {
     name: "Tau Ceti",
@@ -66,6 +72,8 @@ const palettes = [
     ship: "#dbeafe",
     frequency: 494,
     caption: "sinal alienigena",
+    readout: "SINAL 3-2-1 | PADRAO VIVO",
+    energy: 0.74,
   },
   {
     name: "Sonda",
@@ -83,6 +91,8 @@ const palettes = [
     ship: "#e0f2fe",
     frequency: 587,
     caption: "dados da amostra",
+    readout: "AMOSTRA 91% | CONTENCAO",
+    energy: 0.54,
   },
   {
     name: "Cura",
@@ -100,12 +110,17 @@ const palettes = [
     ship: "#ffffff",
     frequency: 659,
     caption: "salvar o Sol",
+    readout: "CURA 100% | RETORNO",
+    energy: 1,
   },
 ];
 
 const phaseScenes = [
   {
     systems: ["sunDrain"],
+    scanner: false,
+    labScale: "0.72 0.72 0.72",
+    consolePosition: "-0.82 0.34 0.56",
     coreScale: "1.28 1.28 1.28",
     shipPosition: "-0.72 0.82 0.42",
     shipScale: "0.68 0.68 0.68",
@@ -117,6 +132,9 @@ const phaseScenes = [
   },
   {
     systems: ["sunDrain"],
+    scanner: true,
+    labScale: "0.82 0.82 0.82",
+    consolePosition: "-0.82 0.34 0.56",
     coreScale: "0.88 0.88 0.88",
     shipPosition: "-0.34 0.96 0.72",
     shipScale: "0.78 0.78 0.78",
@@ -128,6 +146,9 @@ const phaseScenes = [
   },
   {
     systems: ["trajectory"],
+    scanner: false,
+    labScale: "0.76 0.76 0.76",
+    consolePosition: "-0.72 0.44 0.64",
     coreScale: "0.78 0.78 0.78",
     shipPosition: "0 1.22 0",
     shipScale: "1.2 1.2 1.2",
@@ -139,6 +160,9 @@ const phaseScenes = [
   },
   {
     systems: ["tauSignal"],
+    scanner: true,
+    labScale: "0.9 0.9 0.9",
+    consolePosition: "-0.74 0.38 0.54",
     coreScale: "1.02 1.02 1.02",
     shipPosition: "0.38 1.02 -0.52",
     shipScale: "0.9 0.9 0.9",
@@ -150,6 +174,9 @@ const phaseScenes = [
   },
   {
     systems: ["sample"],
+    scanner: true,
+    labScale: "1.18 1.18 1.18",
+    consolePosition: "-0.86 0.32 0.5",
     coreScale: "0.74 0.74 0.74",
     shipPosition: "0.14 1.12 0.52",
     shipScale: "1 1 1",
@@ -161,6 +188,9 @@ const phaseScenes = [
   },
   {
     systems: ["cure"],
+    scanner: false,
+    labScale: "1 1 1",
+    consolePosition: "-0.78 0.4 0.58",
     coreScale: "1.12 1.12 1.12",
     shipPosition: "-0.18 1.3 -0.32",
     shipScale: "1.05 1.05 1.05",
@@ -199,6 +229,14 @@ const trajectorySystem = document.querySelector("#trajectory-system");
 const tauSignalSystem = document.querySelector("#tau-signal-system");
 const sampleSystem = document.querySelector("#sample-system");
 const cureSystem = document.querySelector("#cure-system");
+const missionConsole = document.querySelector("#mission-console");
+const consoleTitle = document.querySelector("#console-title");
+const consoleReadout = document.querySelector("#console-readout");
+const consoleBar = document.querySelector("#console-bar");
+const sampleLab = document.querySelector("#sample-lab");
+const labSample = document.querySelector("#lab-sample");
+const labVial = document.querySelector("#lab-vial");
+const scannerFan = document.querySelector("#scanner-fan");
 const petals = document.querySelectorAll(".petal");
 const beams = document.querySelectorAll(".beam");
 const shipBody = document.querySelector("#ship-body");
@@ -323,6 +361,9 @@ function applyPhaseScene() {
   astrophageField.setAttribute("scale", scene.swarmScale);
   waveField.setAttribute("scale", scene.waveScale);
   constellationField.setAttribute("scale", scene.constellationScale);
+  missionConsole.setAttribute("position", scene.consolePosition);
+  sampleLab.setAttribute("scale", scene.labScale);
+  scannerFan.setAttribute("visible", scene.scanner);
 
   hailMaryShip.setAttribute("animation", {
     property: "rotation",
@@ -344,6 +385,14 @@ function applyPhaseScene() {
     dur: scene.orbitDuration,
     loop: true,
     easing: "linear",
+  });
+  missionConsole.setAttribute("animation__float", {
+    property: "rotation",
+    to: `${66 + paletteIndex * 2} ${paletteIndex % 2 === 0 ? 4 : -4} -18`,
+    dur: 2600,
+    dir: "alternate",
+    loop: true,
+    easing: "easeInOutSine",
   });
 }
 
@@ -416,6 +465,30 @@ function applyPalette() {
   caption.setAttribute("value", palette.caption);
   modeStatus.textContent = palette.name;
   missionStatus.textContent = palette.mission;
+  consoleTitle.setAttribute("value", palette.name.toUpperCase());
+  consoleReadout.setAttribute("value", palette.readout);
+  consoleReadout.setAttribute("color", palette.ringC);
+  consoleBar.setAttribute("width", Math.max(0.08, palette.energy * 0.52));
+  consoleBar.setAttribute("position", `${-0.26 + (palette.energy * 0.52) / 2} -0.14 0.024`);
+  consoleBar.setAttribute("material", {
+    color: palette.energy > 0.7 ? "#22c55e" : palette.energy > 0.45 ? "#facc15" : "#ff4f00",
+    emissive: palette.energy > 0.7 ? "#22c55e" : palette.energy > 0.45 ? "#facc15" : "#ff4f00",
+    emissiveIntensity: 0.55,
+  });
+  labSample.setAttribute("material", {
+    color: palette.astrophage,
+    emissive: palette.astrophage,
+    emissiveIntensity: paletteIndex === 4 ? 1.3 : 0.85,
+  });
+  labVial.setAttribute("material", {
+    color: palette.crystal,
+    emissive: palette.beam,
+    emissiveIntensity: paletteIndex === 4 ? 0.42 : 0.18,
+    transparent: true,
+    opacity: paletteIndex === 4 ? 0.72 : 0.5,
+    metalness: 0.12,
+    roughness: 0.1,
+  });
   innerCrystal.setAttribute("material", {
     color: palette.crystal,
     emissive: palette.ringC,
@@ -578,6 +651,20 @@ function applyPalette() {
     from: paletteIndex === 2 ? "-0.72 0.78 0.82" : phaseScenes[paletteIndex].shipPosition,
     to: phaseScenes[paletteIndex].shipPosition,
     dur: paletteIndex === 2 ? 900 : 360,
+    easing: "easeOutCubic",
+  });
+  restartAnimation(missionConsole, "animation__ping", {
+    property: "scale",
+    from: "0.88 0.88 0.88",
+    to: "1 1 1",
+    dur: 420,
+    easing: "easeOutQuad",
+  });
+  restartAnimation(sampleLab, "animation__sample", {
+    property: "position",
+    from: paletteIndex === 4 ? "0.82 0.08 0.46" : "0.82 0.18 0.46",
+    to: "0.82 0.18 0.46",
+    dur: 520,
     easing: "easeOutCubic",
   });
 

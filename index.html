@@ -269,6 +269,51 @@
             <a-torus radius="0.74" radius-tubular="0.008" rotation="38 0 0" material="color: #facc15; emissive: #facc15; emissiveIntensity: 0.5; transparent: true; opacity: 0.46"></a-torus>
           </a-entity>
 
+          <a-entity id="mission-console" position="-0.82 0.34 0.56" rotation="66 0 -18">
+            <a-box
+              width="0.72"
+              height="0.38"
+              depth="0.018"
+              material="color: #071526; emissive: #0d2d63; emissiveIntensity: 0.28; transparent: true; opacity: 0.82; metalness: 0.2; roughness: 0.24"
+            ></a-box>
+            <a-text
+              id="console-title"
+              value="HAIL MARY"
+              align="center"
+              color="#dbeafe"
+              width="1.4"
+              position="0 0.11 0.018"
+            ></a-text>
+            <a-text
+              id="console-readout"
+              value="SOL 42% | AMOSTRA 0%"
+              align="center"
+              color="#79ffe1"
+              width="1.1"
+              position="0 -0.02 0.02"
+            ></a-text>
+            <a-box id="console-bar" width="0.48" height="0.032" depth="0.02" position="0 -0.14 0.024" material="color: #ff8a1f; emissive: #ff8a1f; emissiveIntensity: 0.55"></a-box>
+          </a-entity>
+
+          <a-entity id="sample-lab" position="0.82 0.18 0.46" rotation="0 -24 0">
+            <a-cylinder radius="0.22" height="0.045" material="color: #111827; metalness: 0.45; roughness: 0.22"></a-cylinder>
+            <a-cylinder id="lab-vial" radius="0.052" height="0.34" position="0 0.2 0" material="color: #e0f2fe; emissive: #38bdf8; emissiveIntensity: 0.18; transparent: true; opacity: 0.58; metalness: 0.12; roughness: 0.1"></a-cylinder>
+            <a-sphere id="lab-sample" radius="0.045" position="0 0.22 0" material="color: #ff8a1f; emissive: #ff8a1f; emissiveIntensity: 0.9"></a-sphere>
+            <a-torus radius="0.16" radius-tubular="0.006" position="0 0.2 0" rotation="90 0 0" material="color: #93c5fd; emissive: #93c5fd; emissiveIntensity: 0.42; transparent: true; opacity: 0.68"></a-torus>
+          </a-entity>
+
+          <a-entity id="scanner-fan" position="0 0.08 -0.56" visible="false">
+            <a-cone
+              radius-bottom="0.62"
+              radius-top="0.05"
+              height="0.72"
+              rotation="-90 0 0"
+              material="color: #38bdf8; emissive: #38bdf8; emissiveIntensity: 0.22; transparent: true; opacity: 0.18; wireframe: true"
+              animation="property: rotation; from: -90 -18 0; to: -90 18 0; dur: 1600; dir: alternate; loop: true; easing: easeInOutSine"
+            ></a-cone>
+            <a-cylinder radius="0.018" height="0.3" rotation="90 0 0" material="color: #dbeafe; emissive: #38bdf8; emissiveIntensity: 0.5"></a-cylinder>
+          </a-entity>
+
           <a-entity id="spark-field" position="0 0.42 0">
             <a-sphere radius="0.025" color="#79ffe1" position="0.12 0.48 -0.62"></a-sphere>
             <a-sphere radius="0.018" color="#ffffff" position="-0.68 0.18 -0.12"></a-sphere>
