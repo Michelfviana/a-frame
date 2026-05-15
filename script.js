@@ -10,7 +10,7 @@ const palettes = [
     petal: "#ffbf47",
     beam: "#f97316",
     base: "#241106",
-    astrophage: "#ff8a1f",
+    swarm: "#ff8a1f",
     ship: "#dbeafe",
     frequency: 247,
     caption: "nucleo instavel",
@@ -26,7 +26,7 @@ const palettes = [
     petal: "#ff8a1f",
     beam: "#ff4f00",
     base: "#210c04",
-    astrophage: "#ffcf33",
+    swarm: "#ffcf33",
     ship: "#f8fafc",
     frequency: 330,
     caption: "enxame ativo",
@@ -42,7 +42,7 @@ const palettes = [
     petal: "#60a5fa",
     beam: "#38bdf8",
     base: "#071526",
-    astrophage: "#ff8a1f",
+    swarm: "#ff8a1f",
     ship: "#ffffff",
     frequency: 392,
     caption: "manobra orbital",
@@ -58,7 +58,7 @@ const palettes = [
     petal: "#79ffe1",
     beam: "#38d5ff",
     base: "#08221d",
-    astrophage: "#facc15",
+    swarm: "#facc15",
     ship: "#dbeafe",
     frequency: 494,
     caption: "sinal detectado",
@@ -74,7 +74,7 @@ const palettes = [
     petal: "#c084fc",
     beam: "#f0abfc",
     base: "#170d25",
-    astrophage: "#facc15",
+    swarm: "#facc15",
     ship: "#e0f2fe",
     frequency: 587,
     caption: "coleta de dados",
@@ -90,7 +90,7 @@ const palettes = [
     petal: "#22c55e",
     beam: "#ffffff",
     base: "#071f12",
-    astrophage: "#facc15",
+    swarm: "#facc15",
     ship: "#ffffff",
     frequency: 659,
     caption: "campo restaurador",
@@ -103,8 +103,8 @@ const phaseScenes = [
     scanner: false,
     coreScale: "1.28 1.28 1.28",
     shipPosition: "-0.72 0.82 0.42",
-    rockyPosition: "1.04 0.74 -0.18",
-    rockyScale: "0.74 0.74 0.74",
+    alienPosition: "1.04 0.74 -0.18",
+    alienScale: "0.74 0.74 0.74",
     shipScale: "0.68 0.68 0.68",
     swarmScale: "1.35 1.35 1.35",
     waveScale: "0.82 0.82 0.82",
@@ -117,8 +117,8 @@ const phaseScenes = [
     scanner: true,
     coreScale: "0.88 0.88 0.88",
     shipPosition: "-0.34 0.96 0.72",
-    rockyPosition: "0.88 0.86 -0.04",
-    rockyScale: "0.94 0.94 0.94",
+    alienPosition: "0.88 0.86 -0.04",
+    alienScale: "0.94 0.94 0.94",
     shipScale: "0.78 0.78 0.78",
     swarmScale: "0.66 0.66 0.66",
     waveScale: "1.28 1.28 1.28",
@@ -131,8 +131,8 @@ const phaseScenes = [
     scanner: false,
     coreScale: "0.78 0.78 0.78",
     shipPosition: "0 1.22 0",
-    rockyPosition: "1.02 0.86 -0.2",
-    rockyScale: "0.9 0.9 0.9",
+    alienPosition: "1.02 0.86 -0.2",
+    alienScale: "0.9 0.9 0.9",
     shipScale: "1.2 1.2 1.2",
     swarmScale: "1.08 1.08 1.08",
     waveScale: "0.78 0.78 0.78",
@@ -141,12 +141,12 @@ const phaseScenes = [
     swarmDuration: 9800,
   },
   {
-    systems: ["tauSignal"],
+    systems: ["signal"],
     scanner: true,
     coreScale: "1.02 1.02 1.02",
     shipPosition: "0.38 1.02 -0.52",
-    rockyPosition: "0.78 1.02 0.28",
-    rockyScale: "1.08 1.08 1.08",
+    alienPosition: "0.78 1.02 0.28",
+    alienScale: "1.08 1.08 1.08",
     shipScale: "0.9 0.9 0.9",
     swarmScale: "1.18 1.18 1.18",
     waveScale: "1.44 1.44 1.44",
@@ -159,8 +159,8 @@ const phaseScenes = [
     scanner: true,
     coreScale: "0.74 0.74 0.74",
     shipPosition: "0.14 1.12 0.52",
-    rockyPosition: "0.9 0.72 0.48",
-    rockyScale: "1.12 1.12 1.12",
+    alienPosition: "0.9 0.72 0.48",
+    alienScale: "1.12 1.12 1.12",
     shipScale: "1 1 1",
     swarmScale: "0.72 0.72 0.72",
     waveScale: "0.92 0.92 0.92",
@@ -173,8 +173,8 @@ const phaseScenes = [
     scanner: false,
     coreScale: "1.12 1.12 1.12",
     shipPosition: "-0.18 1.3 -0.32",
-    rockyPosition: "0.98 1.06 -0.12",
-    rockyScale: "1 1 1",
+    alienPosition: "0.98 1.06 -0.12",
+    alienScale: "1 1 1",
     shipScale: "1.05 1.05 1.05",
     swarmScale: "1.48 1.48 1.48",
     waveScale: "1.62 1.62 1.62",
@@ -203,14 +203,14 @@ const base = document.querySelector("#base");
 const constellationField = document.querySelector("#constellation-field");
 const latticeField = document.querySelector("#lattice-field");
 const waveField = document.querySelector("#wave-field");
-const astrophageField = document.querySelector("#astrophage-field");
+const energySwarmField = document.querySelector("#energy-swarm-field");
 const mainShip = document.querySelector("#main-ship");
-const rockyShip = document.querySelector("#rocky-ship");
-const rockyCore = document.querySelector("#rocky-core");
-const rockyRing = document.querySelector("#rocky-ring");
+const alienShip = document.querySelector("#alien-ship");
+const alienCore = document.querySelector("#alien-core");
+const alienRing = document.querySelector("#alien-ring");
 const sunDrainSystem = document.querySelector("#sun-drain-system");
 const trajectorySystem = document.querySelector("#trajectory-system");
-const tauSignalSystem = document.querySelector("#tau-signal-system");
+const signalSystem = document.querySelector("#signal-system");
 const sampleSystem = document.querySelector("#sample-system");
 const cureSystem = document.querySelector("#cure-system");
 const scannerFan = document.querySelector("#scanner-fan");
@@ -232,7 +232,7 @@ let lastInteraction = 0;
 const phaseSystems = {
   sunDrain: sunDrainSystem,
   trajectory: trajectorySystem,
-  tauSignal: tauSignalSystem,
+  signal: signalSystem,
   sample: sampleSystem,
   cure: cureSystem,
 };
@@ -250,7 +250,7 @@ function createEntity(parent, attributes) {
 
 function buildGeneratedGeometry() {
   const satelliteCount = 18;
-  const astrophageCount = 30;
+  const energyParticleCount = 30;
   const techNodeCount = 10;
 
   for (let index = 0; index < satelliteCount; index += 1) {
@@ -287,15 +287,15 @@ function buildGeneratedGeometry() {
     });
   }
 
-  for (let index = 0; index < astrophageCount; index += 1) {
-    const angle = (Math.PI * 2 * index) / astrophageCount;
+  for (let index = 0; index < energyParticleCount; index += 1) {
+    const angle = (Math.PI * 2 * index) / energyParticleCount;
     const radius = 0.42 + (index % 5) * 0.13;
     const x = Math.cos(angle) * radius;
     const z = Math.sin(angle) * radius;
     const y = 0.04 + ((index * 7) % 9) * 0.075;
 
-    createEntity(astrophageField, {
-      class: "astrophage",
+    createEntity(energySwarmField, {
+      class: "energy-particle",
       geometry: `primitive: dodecahedron; radius: ${0.018 + (index % 4) * 0.004}`,
       material: "color: #ff8a1f; emissive: #ff8a1f; emissiveIntensity: 0.72; metalness: 0.12; roughness: 0.18",
       position: `${x.toFixed(3)} ${y.toFixed(3)} ${z.toFixed(3)}`,
@@ -335,7 +335,7 @@ function buildGeneratedGeometry() {
     "animation",
     "property: rotation; to: 0 -360 0; dur: 22400; loop: true; easing: linear",
   );
-  astrophageField.setAttribute(
+  energySwarmField.setAttribute(
     "animation",
     "property: rotation; to: 0 360 0; dur: 11800; loop: true; easing: linear",
   );
@@ -366,9 +366,9 @@ function applyPhaseScene() {
   coreHitArea.setAttribute("scale", scene.coreScale);
   mainShip.setAttribute("position", scene.shipPosition);
   mainShip.setAttribute("scale", scene.shipScale);
-  rockyShip.setAttribute("position", scene.rockyPosition);
-  rockyShip.setAttribute("scale", scene.rockyScale);
-  astrophageField.setAttribute("scale", scene.swarmScale);
+  alienShip.setAttribute("position", scene.alienPosition);
+  alienShip.setAttribute("scale", scene.alienScale);
+  energySwarmField.setAttribute("scale", scene.swarmScale);
   waveField.setAttribute("scale", scene.waveScale);
   constellationField.setAttribute("scale", scene.constellationScale);
   scannerFan.setAttribute("visible", scene.scanner);
@@ -381,14 +381,14 @@ function applyPhaseScene() {
     loop: true,
     easing: "linear",
   });
-  rockyShip.setAttribute("animation__turn", {
+  alienShip.setAttribute("animation__turn", {
     property: "rotation",
     to: `${paletteIndex * -8} ${-direction} ${paletteIndex % 2 === 0 ? 8 : -8}`,
     dur: 9400,
     loop: true,
     easing: "linear",
   });
-  astrophageField.setAttribute("animation", {
+  energySwarmField.setAttribute("animation", {
     property: "rotation",
     to: `0 ${direction} 0`,
     dur: scene.swarmDuration,
@@ -527,7 +527,7 @@ function applyPalette() {
   });
   shipEngine.setAttribute("material", {
     color: "#101923",
-    emissive: palette.astrophage,
+    emissive: palette.swarm,
     emissiveIntensity: 1.1,
     metalness: 0.4,
     roughness: 0.25,
@@ -546,14 +546,14 @@ function applyPalette() {
     emissive: palette.ringC,
     emissiveIntensity: 0.32,
   });
-  rockyCore.setAttribute("material", {
+  alienCore.setAttribute("material", {
     color: palette.beam,
     emissive: palette.ringC,
     emissiveIntensity: 0.36,
     metalness: 0.55,
     roughness: 0.18,
   });
-  rockyRing.setAttribute("material", {
+  alienRing.setAttribute("material", {
     color: palette.crystal,
     emissive: palette.beam,
     emissiveIntensity: 0.54,
@@ -587,10 +587,10 @@ function applyPalette() {
       opacity: 0.24 + index * 0.04,
     });
   });
-  document.querySelectorAll(".astrophage").forEach((particle, index) => {
+  document.querySelectorAll(".energy-particle").forEach((particle, index) => {
     particle.setAttribute("material", {
-      color: index % 3 === 0 ? palette.astrophage : palette.ringA,
-      emissive: palette.astrophage,
+      color: index % 3 === 0 ? palette.swarm : palette.ringA,
+      emissive: palette.swarm,
       emissiveIntensity: 0.62 + (index % 4) * 0.08,
       metalness: 0.12,
       roughness: 0.18,
@@ -662,7 +662,7 @@ function applyPalette() {
     dir: "alternate",
     easing: "easeOutCubic",
   });
-  restartAnimation(astrophageField, "animation__swarm", {
+  restartAnimation(energySwarmField, "animation__swarm", {
     property: "scale",
     from: phaseScenes[paletteIndex].swarmScale,
     to: paletteIndex === 1 ? "0.48 0.48 0.48" : phaseScenes[paletteIndex].swarmScale,
@@ -677,10 +677,10 @@ function applyPalette() {
     dur: paletteIndex === 2 ? 900 : 360,
     easing: "easeOutCubic",
   });
-  restartAnimation(rockyShip, "animation__approach", {
+  restartAnimation(alienShip, "animation__approach", {
     property: "position",
-    from: paletteIndex === 3 ? "1.22 0.72 0.62" : phaseScenes[paletteIndex].rockyPosition,
-    to: phaseScenes[paletteIndex].rockyPosition,
+    from: paletteIndex === 3 ? "1.22 0.72 0.62" : phaseScenes[paletteIndex].alienPosition,
+    to: phaseScenes[paletteIndex].alienPosition,
     dur: paletteIndex === 3 ? 900 : 420,
     easing: "easeOutCubic",
   });
