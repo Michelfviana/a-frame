@@ -27,7 +27,3 @@ A cada toque no núcleo ou no botão "Avancar", a cena alterna entre seis fases:
 - Tau Ceti
 - Sonda
 - Cura
-
-## Publicação
-
-Por ser um projeto estático, pode ser publicado no GitHub Pages, Netlify, Vercel ou qualquer hospedagem de arquivos HTML.
