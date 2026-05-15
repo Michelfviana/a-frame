@@ -103,6 +103,75 @@ const palettes = [
   },
 ];
 
+const phaseScenes = [
+  {
+    systems: ["sunDrain"],
+    coreScale: "1.28 1.28 1.28",
+    shipPosition: "-0.72 0.82 0.42",
+    shipScale: "0.68 0.68 0.68",
+    swarmScale: "1.35 1.35 1.35",
+    waveScale: "0.82 0.82 0.82",
+    constellationScale: "0.72 0.72 0.72",
+    orbitDuration: 11800,
+    swarmDuration: 7200,
+  },
+  {
+    systems: ["sunDrain"],
+    coreScale: "0.88 0.88 0.88",
+    shipPosition: "-0.34 0.96 0.72",
+    shipScale: "0.78 0.78 0.78",
+    swarmScale: "0.66 0.66 0.66",
+    waveScale: "1.28 1.28 1.28",
+    constellationScale: "0.9 0.9 0.9",
+    orbitDuration: 4600,
+    swarmDuration: 3600,
+  },
+  {
+    systems: ["trajectory"],
+    coreScale: "0.78 0.78 0.78",
+    shipPosition: "0 1.22 0",
+    shipScale: "1.2 1.2 1.2",
+    swarmScale: "1.08 1.08 1.08",
+    waveScale: "0.78 0.78 0.78",
+    constellationScale: "1.22 1.22 1.22",
+    orbitDuration: 7600,
+    swarmDuration: 9800,
+  },
+  {
+    systems: ["tauSignal"],
+    coreScale: "1.02 1.02 1.02",
+    shipPosition: "0.38 1.02 -0.52",
+    shipScale: "0.9 0.9 0.9",
+    swarmScale: "1.18 1.18 1.18",
+    waveScale: "1.44 1.44 1.44",
+    constellationScale: "1.3 1.3 1.3",
+    orbitDuration: 6200,
+    swarmDuration: 12800,
+  },
+  {
+    systems: ["sample"],
+    coreScale: "0.74 0.74 0.74",
+    shipPosition: "0.14 1.12 0.52",
+    shipScale: "1 1 1",
+    swarmScale: "0.72 0.72 0.72",
+    waveScale: "0.92 0.92 0.92",
+    constellationScale: "0.94 0.94 0.94",
+    orbitDuration: 5200,
+    swarmDuration: 5400,
+  },
+  {
+    systems: ["cure"],
+    coreScale: "1.12 1.12 1.12",
+    shipPosition: "-0.18 1.3 -0.32",
+    shipScale: "1.05 1.05 1.05",
+    swarmScale: "1.48 1.48 1.48",
+    waveScale: "1.62 1.62 1.62",
+    constellationScale: "1.1 1.1 1.1",
+    orbitDuration: 9000,
+    swarmDuration: 15000,
+  },
+];
+
 const marker = document.querySelector("#hiro-marker");
 const markerStatus = document.querySelector("#marker-status");
 const modeStatus = document.querySelector("#mode-status");
@@ -124,6 +193,12 @@ const constellationField = document.querySelector("#constellation-field");
 const latticeField = document.querySelector("#lattice-field");
 const waveField = document.querySelector("#wave-field");
 const astrophageField = document.querySelector("#astrophage-field");
+const hailMaryShip = document.querySelector("#hail-mary-ship");
+const sunDrainSystem = document.querySelector("#sun-drain-system");
+const trajectorySystem = document.querySelector("#trajectory-system");
+const tauSignalSystem = document.querySelector("#tau-signal-system");
+const sampleSystem = document.querySelector("#sample-system");
+const cureSystem = document.querySelector("#cure-system");
 const petals = document.querySelectorAll(".petal");
 const beams = document.querySelectorAll(".beam");
 const shipBody = document.querySelector("#ship-body");
@@ -137,6 +212,13 @@ let soundEnabled = false;
 let markerVisible = false;
 let audioContext;
 let lastInteraction = 0;
+const phaseSystems = {
+  sunDrain: sunDrainSystem,
+  trajectory: trajectorySystem,
+  tauSignal: tauSignalSystem,
+  sample: sampleSystem,
+  cure: cureSystem,
+};
 
 function createEntity(parent, attributes) {
   const entity = document.createElement("a-entity");
@@ -222,6 +304,49 @@ function restartAnimation(element, name, config) {
   requestAnimationFrame(() => element.setAttribute(name, config));
 }
 
+function setPhaseSystems(activeSystems) {
+  Object.entries(phaseSystems).forEach(([name, system]) => {
+    system.setAttribute("visible", activeSystems.includes(name));
+  });
+}
+
+function applyPhaseScene() {
+  const scene = phaseScenes[paletteIndex];
+  const direction = paletteIndex % 2 === 0 ? 360 : -360;
+
+  setPhaseSystems(scene.systems);
+
+  core.setAttribute("scale", scene.coreScale);
+  coreHitArea.setAttribute("scale", scene.coreScale);
+  hailMaryShip.setAttribute("position", scene.shipPosition);
+  hailMaryShip.setAttribute("scale", scene.shipScale);
+  astrophageField.setAttribute("scale", scene.swarmScale);
+  waveField.setAttribute("scale", scene.waveScale);
+  constellationField.setAttribute("scale", scene.constellationScale);
+
+  hailMaryShip.setAttribute("animation", {
+    property: "rotation",
+    to: `${paletteIndex * 12} ${direction} ${paletteIndex % 3 === 0 ? 12 : -12}`,
+    dur: paletteIndex === 2 ? 7200 : 13800,
+    loop: true,
+    easing: "linear",
+  });
+  astrophageField.setAttribute("animation", {
+    property: "rotation",
+    to: `0 ${direction} 0`,
+    dur: scene.swarmDuration,
+    loop: true,
+    easing: "linear",
+  });
+  orbit.setAttribute("animation", {
+    property: "rotation",
+    to: `0 ${-direction} 0`,
+    dur: scene.orbitDuration,
+    loop: true,
+    easing: "linear",
+  });
+}
+
 function setMarkerVisible(isVisible) {
   markerVisible = isVisible;
   markerStatus.textContent = isVisible ? "Detectado" : "Buscando Hiro";
@@ -274,6 +399,8 @@ function playTone() {
 
 function applyPalette() {
   const palette = palettes[paletteIndex];
+
+  applyPhaseScene();
 
   core.setAttribute("material", {
     color: palette.core,
@@ -390,13 +517,6 @@ function applyPalette() {
       roughness: 0.18,
     });
   });
-  orbit.setAttribute("animation", {
-    property: "rotation",
-    to: `0 ${paletteIndex % 2 === 0 ? -360 : 360} 0`,
-    dur: 5600 + paletteIndex * 1200,
-    loop: true,
-    easing: "linear",
-  });
   restartAnimation(sparkField, "animation__burst", {
     property: "scale",
     from: "0.72 0.72 0.72",
@@ -407,8 +527,8 @@ function applyPalette() {
   });
   restartAnimation(core, "animation__tap", {
     property: "position",
-    from: "0 0.34 0",
-    to: "0 0.46 0",
+    from: "0 0.38 0",
+    to: "0 0.5 0",
     dur: 240,
     dir: "alternate",
     easing: "easeOutQuad",
@@ -447,11 +567,18 @@ function applyPalette() {
   });
   restartAnimation(astrophageField, "animation__swarm", {
     property: "scale",
-    from: "1.28 1.28 1.28",
-    to: "0.82 0.82 0.82",
+    from: phaseScenes[paletteIndex].swarmScale,
+    to: paletteIndex === 1 ? "0.48 0.48 0.48" : phaseScenes[paletteIndex].swarmScale,
     dur: 680,
     dir: "alternate",
     easing: "easeInOutQuad",
+  });
+  restartAnimation(hailMaryShip, "animation__maneuver", {
+    property: "position",
+    from: paletteIndex === 2 ? "-0.72 0.78 0.82" : phaseScenes[paletteIndex].shipPosition,
+    to: phaseScenes[paletteIndex].shipPosition,
+    dur: paletteIndex === 2 ? 900 : 360,
+    easing: "easeOutCubic",
   });
 
   playTone();

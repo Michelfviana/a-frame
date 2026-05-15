@@ -203,6 +203,72 @@
           <a-entity id="wave-field" position="0 0.42 0"></a-entity>
           <a-entity id="astrophage-field" position="0 0.42 0"></a-entity>
 
+          <a-entity id="sun-drain-system" position="0 0.42 0" visible="false">
+            <a-cylinder
+              class="phase-beam"
+              radius="0.018"
+              height="1.12"
+              position="0.36 0.38 0"
+              rotation="0 0 72"
+              material="color: #ff8a1f; emissive: #ff8a1f; emissiveIntensity: 0.8; transparent: true; opacity: 0.56"
+              animation="property: scale; from: 1 0.72 1; to: 1 1.18 1; dur: 820; dir: alternate; loop: true; easing: easeInOutSine"
+            ></a-cylinder>
+            <a-cylinder
+              class="phase-beam"
+              radius="0.012"
+              height="0.9"
+              position="-0.34 0.26 0.18"
+              rotation="32 0 -64"
+              material="color: #facc15; emissive: #facc15; emissiveIntensity: 0.7; transparent: true; opacity: 0.44"
+              animation="property: scale; from: 1 1.2 1; to: 1 0.7 1; dur: 760; dir: alternate; loop: true; easing: easeInOutSine"
+            ></a-cylinder>
+            <a-torus
+              radius="0.42"
+              radius-tubular="0.012"
+              rotation="90 0 0"
+              material="color: #7a1900; emissive: #ff4f00; emissiveIntensity: 0.68; transparent: true; opacity: 0.58"
+              animation="property: scale; from: 0.8 0.8 0.8; to: 1.38 1.38 1.38; dur: 1000; dir: alternate; loop: true; easing: easeOutQuad"
+            ></a-torus>
+          </a-entity>
+
+          <a-entity id="trajectory-system" position="0 0.42 0" visible="false">
+            <a-cylinder
+              radius="0.009"
+              height="1.35"
+              position="-0.46 0.38 0.08"
+              rotation="74 18 -42"
+              material="color: #93c5fd; emissive: #60a5fa; emissiveIntensity: 0.7; transparent: true; opacity: 0.5"
+            ></a-cylinder>
+            <a-sphere radius="0.046" position="-0.82 0.16 0.28" material="color: #60a5fa; emissive: #60a5fa; emissiveIntensity: 0.65"></a-sphere>
+            <a-sphere radius="0.034" position="-0.3 0.54 0.06" material="color: #ffffff; emissive: #93c5fd; emissiveIntensity: 0.55"></a-sphere>
+            <a-sphere radius="0.052" position="0.38 0.88 -0.18" material="color: #38bdf8; emissive: #38bdf8; emissiveIntensity: 0.7"></a-sphere>
+          </a-entity>
+
+          <a-entity id="tau-signal-system" position="0 0.72 0" visible="false">
+            <a-torus radius="0.36" radius-tubular="0.006" rotation="0 90 0" material="color: #79ffe1; emissive: #79ffe1; emissiveIntensity: 0.66; transparent: true; opacity: 0.7"></a-torus>
+            <a-torus radius="0.52" radius-tubular="0.005" rotation="0 90 0" material="color: #38d5ff; emissive: #38d5ff; emissiveIntensity: 0.56; transparent: true; opacity: 0.48"></a-torus>
+            <a-torus radius="0.68" radius-tubular="0.004" rotation="0 90 0" material="color: #a7f3d0; emissive: #a7f3d0; emissiveIntensity: 0.5; transparent: true; opacity: 0.38"></a-torus>
+            <a-box width="0.06" height="0.46" depth="0.02" position="-0.18 0 0" material="color: #79ffe1; emissive: #79ffe1; emissiveIntensity: 0.55"></a-box>
+            <a-box width="0.06" height="0.72" depth="0.02" position="0 0 0" material="color: #ffffff; emissive: #38d5ff; emissiveIntensity: 0.65"></a-box>
+            <a-box width="0.06" height="0.32" depth="0.02" position="0.18 0 0" material="color: #79ffe1; emissive: #79ffe1; emissiveIntensity: 0.55"></a-box>
+          </a-entity>
+
+          <a-entity id="sample-system" position="0 0.58 0" visible="false">
+            <a-cylinder radius="0.09" height="0.28" material="color: #e9d5ff; emissive: #c084fc; emissiveIntensity: 0.36; metalness: 0.35; roughness: 0.18"></a-cylinder>
+            <a-torus radius="0.18" radius-tubular="0.008" rotation="90 0 0" material="color: #f0abfc; emissive: #f0abfc; emissiveIntensity: 0.62; transparent: true; opacity: 0.74"></a-torus>
+            <a-torus radius="0.26" radius-tubular="0.006" rotation="25 0 70" material="color: #ffffff; emissive: #c084fc; emissiveIntensity: 0.48; transparent: true; opacity: 0.52"></a-torus>
+          </a-entity>
+
+          <a-entity id="cure-system" position="0 0.42 0" visible="false">
+            <a-sphere
+              radius="0.82"
+              material="color: #22c55e; emissive: #4ade80; emissiveIntensity: 0.18; transparent: true; opacity: 0.16; wireframe: true"
+              animation="property: scale; from: 0.75 0.75 0.75; to: 1.12 1.12 1.12; dur: 1500; dir: alternate; loop: true; easing: easeInOutSine"
+            ></a-sphere>
+            <a-torus radius="0.5" radius-tubular="0.012" rotation="90 0 0" material="color: #4ade80; emissive: #4ade80; emissiveIntensity: 0.72; transparent: true; opacity: 0.64"></a-torus>
+            <a-torus radius="0.74" radius-tubular="0.008" rotation="38 0 0" material="color: #facc15; emissive: #facc15; emissiveIntensity: 0.5; transparent: true; opacity: 0.46"></a-torus>
+          </a-entity>
+
           <a-entity id="spark-field" position="0 0.42 0">
             <a-sphere radius="0.025" color="#79ffe1" position="0.12 0.48 -0.62"></a-sphere>
             <a-sphere radius="0.018" color="#ffffff" position="-0.68 0.18 -0.12"></a-sphere>

@@ -21,9 +21,9 @@ Experimento de Realidade Aumentada feito com A-Frame e AR.js, inspirado na energ
 
 A cada toque no núcleo ou no botão "Avancar", a cena alterna entre seis fases:
 
-- Sol
-- Astrophage
-- Hail Mary
-- Tau Ceti
-- Sonda
-- Cura
+- Sol: estrela instável, feixes de drenagem e núcleo dilatado.
+- Astrophage: enxame se fecha sobre a estrela e acelera o campo orbital.
+- Hail Mary: a nave entra em manobra, com rota e pontos de navegação.
+- Tau Ceti: sinais alienígenas aparecem em anéis e barras pulsantes.
+- Sonda: cápsula de amostra e contenção ficam no centro da cena.
+- Cura: escudo/onda de restauração se expande a partir do núcleo.
