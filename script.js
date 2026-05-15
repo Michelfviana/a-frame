@@ -42,7 +42,7 @@ let lastInteraction = 0;
 
 function setMarkerVisible(isVisible) {
   markerVisible = isVisible;
-  markerStatus.textContent = isVisible ? "Marcador detectado" : "Procurando marcador";
+  markerStatus.textContent = isVisible ? "Detectado" : "Buscando Hiro";
   markerStatus.classList.toggle("is-visible", isVisible);
   evolveButton.disabled = !isVisible;
   caption.setAttribute("value", isVisible ? palettes[paletteIndex].caption : "aponte para o Hiro");

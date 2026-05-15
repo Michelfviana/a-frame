@@ -2,7 +2,7 @@
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=overlays-content" />
     <title>Jardim Orbital AR</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
@@ -18,10 +18,10 @@
       <section class="panel">
         <span id="marker-status" class="status">Procurando marcador</span>
         <button id="evolve-button" class="evolve-button" type="button" disabled>
-          Evoluir jardim
+          Evoluir
         </button>
         <a class="marker-link" href="https://ar-js-org.github.io/AR.js/data/images/hiro.png" target="_blank" rel="noreferrer">
-          Abrir marcador Hiro
+          Marcador Hiro
         </a>
       </section>
     </main>
@@ -34,7 +34,7 @@
       embedded
       vr-mode-ui="enabled: false"
       renderer="antialias: true; alpha: true; colorManagement: true"
-      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth: 640; sourceHeight: 480; displayWidth: 640; displayHeight: 480;"
     >
       <a-assets>
         <a-mixin
