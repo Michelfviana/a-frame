@@ -314,6 +314,21 @@
             <a-cylinder radius="0.018" height="0.3" rotation="90 0 0" material="color: #dbeafe; emissive: #38bdf8; emissiveIntensity: 0.5"></a-cylinder>
           </a-entity>
 
+          <a-entity id="holo-grid" position="0 0.065 0">
+            <a-plane
+              width="1.7"
+              height="1.7"
+              rotation="-90 0 0"
+              material="color: #38bdf8; emissive: #38bdf8; emissiveIntensity: 0.12; transparent: true; opacity: 0.12; wireframe: true"
+            ></a-plane>
+            <a-cylinder radius="0.012" height="1.4" position="0 0.02 0" rotation="0 0 90" material="color: #ff4f00; emissive: #ff4f00; emissiveIntensity: 0.52; transparent: true; opacity: 0.72"></a-cylinder>
+            <a-cylinder radius="0.012" height="1.4" position="0 0.024 0" rotation="90 0 0" material="color: #38bdf8; emissive: #38bdf8; emissiveIntensity: 0.52; transparent: true; opacity: 0.72"></a-cylinder>
+            <a-cone radius-bottom="0.045" radius-top="0" height="0.12" position="0.74 0.02 0" rotation="0 0 -90" material="color: #ff4f00; emissive: #ff4f00; emissiveIntensity: 0.64"></a-cone>
+            <a-cone radius-bottom="0.045" radius-top="0" height="0.12" position="0 0.024 -0.74" rotation="-90 0 0" material="color: #38bdf8; emissive: #38bdf8; emissiveIntensity: 0.64"></a-cone>
+          </a-entity>
+
+          <a-entity id="tech-nodes" position="0 0.18 0"></a-entity>
+
           <a-entity id="spark-field" position="0 0.42 0">
             <a-sphere radius="0.025" color="#79ffe1" position="0.12 0.48 -0.62"></a-sphere>
             <a-sphere radius="0.018" color="#ffffff" position="-0.68 0.18 -0.12"></a-sphere>

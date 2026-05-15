@@ -237,6 +237,8 @@ const sampleLab = document.querySelector("#sample-lab");
 const labSample = document.querySelector("#lab-sample");
 const labVial = document.querySelector("#lab-vial");
 const scannerFan = document.querySelector("#scanner-fan");
+const holoGrid = document.querySelector("#holo-grid");
+const techNodes = document.querySelector("#tech-nodes");
 const petals = document.querySelectorAll(".petal");
 const beams = document.querySelectorAll(".beam");
 const shipBody = document.querySelector("#ship-body");
@@ -272,6 +274,7 @@ function createEntity(parent, attributes) {
 function buildGeneratedGeometry() {
   const satelliteCount = 18;
   const astrophageCount = 30;
+  const techNodeCount = 10;
 
   for (let index = 0; index < satelliteCount; index += 1) {
     const angle = (Math.PI * 2 * index) / satelliteCount;
@@ -323,6 +326,30 @@ function buildGeneratedGeometry() {
     });
   }
 
+  for (let index = 0; index < techNodeCount; index += 1) {
+    const angle = (Math.PI * 2 * index) / techNodeCount;
+    const radius = index % 2 === 0 ? 0.66 : 0.48;
+    const x = Math.cos(angle) * radius;
+    const z = Math.sin(angle) * radius;
+
+    createEntity(techNodes, {
+      class: "tech-node",
+      geometry: `primitive: box; width: ${index % 2 === 0 ? 0.08 : 0.055}; height: 0.018; depth: ${index % 2 === 0 ? 0.055 : 0.08}`,
+      material: "color: #071526; emissive: #38bdf8; emissiveIntensity: 0.32; metalness: 0.4; roughness: 0.18",
+      position: `${x.toFixed(3)} 0 ${(z).toFixed(3)}`,
+      rotation: `0 ${(-angle * 180) / Math.PI} 0`,
+      animation: `property: position; from: ${x.toFixed(3)} 0 ${z.toFixed(3)}; to: ${x.toFixed(3)} 0.055 ${z.toFixed(3)}; dur: ${1100 + index * 80}; dir: alternate; loop: true; easing: easeInOutSine`,
+    });
+
+    createEntity(techNodes, {
+      class: "circuit-line",
+      geometry: `primitive: cylinder; radius: 0.003; height: ${radius}; segmentsRadial: 5`,
+      material: "color: #38bdf8; emissive: #38bdf8; emissiveIntensity: 0.34; transparent: true; opacity: 0.42",
+      position: `${(x / 2).toFixed(3)} 0.006 ${(z / 2).toFixed(3)}`,
+      rotation: `90 ${(-angle * 180) / Math.PI} 0`,
+    });
+  }
+
   constellationField.setAttribute(
     "animation",
     "property: rotation; to: 0 360 0; dur: 18200; loop: true; easing: linear",
@@ -334,6 +361,10 @@ function buildGeneratedGeometry() {
   astrophageField.setAttribute(
     "animation",
     "property: rotation; to: 0 360 0; dur: 11800; loop: true; easing: linear",
+  );
+  techNodes.setAttribute(
+    "animation",
+    "property: rotation; to: 0 -360 0; dur: 26000; loop: true; easing: linear",
   );
 }
 
@@ -364,6 +395,7 @@ function applyPhaseScene() {
   missionConsole.setAttribute("position", scene.consolePosition);
   sampleLab.setAttribute("scale", scene.labScale);
   scannerFan.setAttribute("visible", scene.scanner);
+  holoGrid.setAttribute("visible", paletteIndex !== 0);
 
   hailMaryShip.setAttribute("animation", {
     property: "rotation",
@@ -489,6 +521,16 @@ function applyPalette() {
     metalness: 0.12,
     roughness: 0.1,
   });
+  holoGrid.querySelectorAll("a-plane, a-cylinder, a-cone").forEach((part, index) => {
+    part.setAttribute("material", {
+      color: index % 2 === 0 ? palette.beam : palette.ringC,
+      emissive: index % 2 === 0 ? palette.beam : palette.ringC,
+      emissiveIntensity: index === 0 ? 0.14 : 0.58,
+      transparent: true,
+      opacity: index === 0 ? 0.12 : 0.7,
+      wireframe: index === 0,
+    });
+  });
   innerCrystal.setAttribute("material", {
     color: palette.crystal,
     emissive: palette.ringC,
@@ -588,6 +630,24 @@ function applyPalette() {
       emissiveIntensity: 0.62 + (index % 4) * 0.08,
       metalness: 0.12,
       roughness: 0.18,
+    });
+  });
+  document.querySelectorAll(".tech-node").forEach((node, index) => {
+    node.setAttribute("material", {
+      color: "#071526",
+      emissive: index % 2 === 0 ? palette.beam : palette.ringC,
+      emissiveIntensity: 0.34 + (index % 3) * 0.08,
+      metalness: 0.4,
+      roughness: 0.18,
+    });
+  });
+  document.querySelectorAll(".circuit-line").forEach((line, index) => {
+    line.setAttribute("material", {
+      color: index % 2 === 0 ? palette.ringC : palette.beam,
+      emissive: index % 2 === 0 ? palette.ringC : palette.beam,
+      emissiveIntensity: 0.38,
+      transparent: true,
+      opacity: paletteIndex === 2 || paletteIndex === 4 ? 0.68 : 0.38,
     });
   });
   restartAnimation(sparkField, "animation__burst", {

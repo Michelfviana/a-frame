@@ -17,6 +17,7 @@ Experimento de Realidade Aumentada feito com A-Frame e AR.js, inspirado na energ
 - Experiência multimídia com animação visual e som gerado no navegador.
 - Cena procedural com nave Hail Mary, enxame de Astrophage, satélites orbitais, raios, ondas de energia, cristais e múltiplas fases visuais.
 - Elementos não orbitais: console holográfico de telemetria, laboratório de amostra e scanner em leque.
+- Estética tecnológica com HUD, scanlines, grade holográfica, eixos de coordenada, nós de circuito e telemetria reativa.
 
 ## Fases
 
